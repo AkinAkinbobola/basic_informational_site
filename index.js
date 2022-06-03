@@ -19,4 +19,8 @@ app.get("/contact-me.html", (req, res) =>{
     res.render("contact-me");
 })
 
+app.use((req, res) =>{
+    res.render("404");
+})
+
 app.listen(3000);
