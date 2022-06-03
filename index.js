@@ -1,43 +1,22 @@
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
 
-const server = http.createServer((req, res) =>{
-    let path = "./views/";
+app.set("view engine", "ejs");
 
-    switch (req.url) {
-        case "/":
-            path += "index.html";
-            res.statusCode = 200;
-            break;
-        case "/index.html":
-            path += "index.html";
-            res.statusCode = 200;
-            break;
-        case "/about.html":
-            path += "about.html";
-            res.statusCode = 200;
-            break;
-        case "/contact-me.html":
-            path += "contact-me.html";
-            res.statusCode = 200;
-            break;
-        default:
-            path += "404.html";
-            res.statusCode = 404;
-            break;
+app.get("/", (req, res) =>{
+    res.render("index");
+})
 
-    }
+app.get("/index.html", (req, res) =>{
+    res.render("index");
+})
 
-    fs.readFile(path, (err, data) =>{
-        if(err){
-            console.log(err);
-            res.end();
-        }
-        else{
-            res.end(data);
-        }
-    })
+app.get("/about.html", (req, res) =>{
+    res.render("about");
+})
 
+app.get("/contact-me.html", (req, res) =>{
+    res.render("contact-me");
+})
 
-
-}).listen(3000, "localhost");
+app.listen(3000);
